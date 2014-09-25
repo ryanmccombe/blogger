@@ -1,5 +1,16 @@
 <h1> <%= @article.title %></h1>
 <p> <%= @article.body %></p>
+<h3>
+<% if @article.comments.size < 1 %>
+    No Comments
+<% elsif @article.comments.size === 1 %>
+    1 Comment
+<% else %>
+    <%= "#{@article.comments.size} Comments" %>
+<% end %>
+</h3>
+<%= render partial: "articles/comment", collection: @article.comments %>
+<%= render partial: "comments/form" %>
 <%= link_to "Edit this article", edit_article_path(@article)%>
 <br />
 <%= link_to "Delete this article", article_path(@article), method: :delete, data: {confirm: "For realsies?"} %>
